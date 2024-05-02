@@ -1,0 +1,51 @@
+./main \
+  -i -m models/mixtral-8x7b-instruct-v0.1.Q2_K.gguf -t 4 --repeat_penalty 1 --no-penalize-nl --color --temp 0 -c 512 -n -1 -p "<s> Je suis le fidèle assistant de l'utilisateur. Je réponds uniquement par des réponses courtes et précises. </s> [INST] Question de l'utilisateur : Quel est le sens de la vie ? [/INST]" 
+
+./main \
+  -i -m models/mixtral-8x7b-instruct-v0.1.Q3_K_M.gguf -t 8 --repeat_penalty 1 --no-penalize-nl --color --temp 0 -c 512 -n -1 -p "<s> Tu es le fidèle assistant de l'utilisateur qui est ton Maître. Fais des réponses courtes, précises et concises pour répondre. </s> [INST] Bonjour comment tu vas ? [/INST]" 
+  
+  
+  ./main \
+  -i -m build/bin/models/mixtral-8x7b-instruct-v0.1.Q2_K.gguf -t 4 --repeat_penalty 1 --no-penalize-nl --color --temp 0 -c 512 -n -1 -p "<s> Je suis le fidèle assistant de l'utilisateur. Je réponds uniquement par des réponses courtes et précises. </s> [INST] Question de l'utilisateur : Quel est le sens de la vie ? [/INST]" 
+
+  ./main \
+  -i -m build/bin/models/mistral-7b-instruct-v0.2.Q8_0.gguf -t 4 --repeat_penalty 1 --no-penalize-nl --color --temp 0 -c 512 -n -1 -p "<s> Je suis le fidèle assistant de l'utilisateur. Je réponds uniquement par des réponses courtes et précises. </s> [INST] Question de l'utilisateur : Quel est le sens de la vie ? [/INST]" 
+
+  ./main \
+  -i -m /home/ogs-x/Desktop/development/llm-models/mistral-7b-v0.1.Q8_0.gguf \
+  -t 4 \
+  --repeat_penalty 1 \
+  --no-penalize-nl --color \
+  --temp 0 -c 512 -n -1 \
+  -p "[INST] You are a helpful code assistant. Your task is to generate a valid JSON object based on the given information:
+name: John
+lastname: Smith
+address: #1 Samuel St.
+Just generate the JSON object without explanations:
+[/INST]"
+
+  ./main \
+  -i -m /home/ogs-x/Desktop/development/llm-models/mistral-7b-instruct-v0.2.Q8_0.gguf \
+  -t 4 \
+  --repeat_penalty 1 \
+  --no-penalize-nl --color \
+  --temp 0 -c 512 -n -1 \
+  -p "<s>Comporte toi en assistant juridique compétent, répond de façon la plus concise et précise pour aider l'utilisateur. [INST] Quelle est la différence entre le droit civil et le droit pénal ? [/INST]</s>"
+
+
+./finetune \
+        --model-base /home/ogs-x/Desktop/development/llm-models/mistral-7b-v0.1.Q8_0.gguf \
+        --checkpoint-in /home/ogs-x/Desktop/development/llm-models/mistral-test-LATEST.gguf \
+        --checkpoint-out /home/ogs-x/Desktop/development/llm-models/mistral-test-ITERATION.gguf \
+        --lora-out /home/ogs-x/Desktop/development/llm-models/mistral-test-ITERATION.bin \
+        --train-data /home/ogs-x/Desktop/development/xgen-ai/dataset.txt \
+        --save-every 10 \
+        --threads 6 --adam-iter 30 --batch 4 --ctx 64 \
+        --use-checkpointing
+
+
+## For each line separated try : --sample-start "\n"
+# predict
+./bin/main -m /home/ogs-x/Desktop/development/llm-models/mistral-7b-v0.1.Q8_0.gguf --lora /home/ogs-x/Desktop/development/llm-models/mistral-test-LATEST.gguf
+
+

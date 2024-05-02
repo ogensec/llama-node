@@ -17,12 +17,22 @@ export default class LLamaChat {
 		currentType = null;
 		currentPath = null;
 		instructions = null;
+		// params = {
+		// 		numPredict: 1024,
+		// 		temperature: 0.00001,
+		// 		topP: 2,
+		// 		topK: 15,
+		// 		repeatPenalty: 1.2,
+		// 		repeatLastN: 128,
+		// 		seed: 42,
+		// 		feedPrompt: true,
+		// }
 		params = {
 				numPredict: 1024,
 				temperature: 0.00001,
 				topP: 2,
 				topK: 15,
-				repeatPenalty: 1.2,
+				repeatPenalty: 1,
 				repeatLastN: 128,
 				seed: 42,
 				feedPrompt: true,
